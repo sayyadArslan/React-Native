@@ -1,0 +1,75 @@
+# Node modules
+node_modules/
+
+# Watchman
+.watchmanconfig
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build outputs
+ios/build/
+android/app/build/
+android/.gradle/
+android/.idea/
+android/local.properties
+android/.cxx/
+
+# Xcode
+ios/Pods/
+ios/Podfile.lock
+ios/Podfile.swp
+ios/*.xcodeproj/
+ios/*.xcworkspace/
+ios/.DS_Store
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+xcuserdata/
+
+# Android
+*.keystore
+android/key.properties
+
+# Expo
+.expo/
+.expo-shared/
+
+# Environment
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Misc
+.DS_Store
+*.swp
+*.swo
+.idea/
+.vscode/
+*.iml
+*.bak
+*.tmp
+
+# Metro
+metro-cache/
+react-native-packager-cache-*/
+
+# Buck build system
+buck-out/
+.buckconfig.local
+
+# macOS files
+*.DS_Store
+
+# npm/lock files (optional, based on your preference)
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+desktop.ini

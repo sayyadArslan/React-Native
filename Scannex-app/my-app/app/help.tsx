@@ -20,11 +20,15 @@ export default function Help() {
       <Text style={styles.text}>
         Make sure camera permission is allowed and the barcode is clear.
       </Text>
-
       <Text style={styles.heading}>Contact</Text>
       <Text style={styles.text}>
-        Email: support@example.com
+        Email: zentyrodigital@gmail.com
       </Text>
+      <Text style={styles.heading}>App Name</Text>
+      <Text style={styles.text}>
+        Scannex-Qr Code And Barcode Scanner
+      </Text>
+
     </ScrollView>
   );
 }

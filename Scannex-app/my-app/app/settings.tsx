@@ -1,4 +1,5 @@
-import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Pressable, ScrollView }
+ from 'react-native';
 import { useRouter } from 'expo-router';
 import useScanStore from '../hooks/useScanStore';
 

@@ -28,7 +28,7 @@ export default function PrivacyPolicy() {
 
       <Text style={styles.heading}>Contact</Text>
       <Text style={styles.text}>
-        If you have any questions, contact us at support@example.com
+        If you have any questions, contact us at zentyrodigital@gmail.com
       </Text>
     </ScrollView>
   );

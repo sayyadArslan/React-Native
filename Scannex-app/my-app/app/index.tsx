@@ -1,7 +1,14 @@
-import { View, Text, StyleSheet, Dimensions, Pressable,Image } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  Pressable,
+  Image,
+} from 'react-native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useRouter } from 'expo-router';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import useScanStore from '../hooks/useScanStore';
 import { useFocusEffect } from '@react-navigation/native';
 
@@ -9,17 +16,21 @@ const { width } = Dimensions.get('window');
 const FRAME = width * 0.7;
 
 export default function Index() {
-  const [permission, requestPermission] = useCameraPermissions();
-  const [scanEnabled, setScanEnabled] = useState(false);
-  const [flash, setFlash] = useState<'on' | 'off'>('off');
-  useFocusEffect(() => {
-  setScanEnabled(false);
-});
-
   const router = useRouter();
   const addScan = useScanStore((s) => s.addScan);
 
-  // 🔐 Permission UI
+  const [permission, requestPermission] = useCameraPermissions();
+  const [scanEnabled, setScanEnabled] = useState(false);
+  const [flash, setFlash] = useState<'on' | 'off'>('off');
+
+  // Reset scanner when screen focuses
+  useFocusEffect(
+    useCallback(() => {
+      setScanEnabled(false);
+    }, [])
+  );
+
+  // 🔐 Permission Screen
   if (!permission?.granted) {
     return (
       <View style={styles.center}>
@@ -31,8 +42,10 @@ export default function Index() {
     );
   }
 
-  // 📦 Handle scan result
+  // 📦 Handle scan result (SAFE & STABLE)
   const onScan = (data: string, type: string) => {
+    if (!scanEnabled) return; // ⛔ prevent multiple scans
+
     setScanEnabled(false);
 
     addScan({
@@ -91,24 +104,24 @@ export default function Index() {
           </Text>
         </Pressable>
 
-        {/* Scan */}
+        {/* Scan Button */}
         <Pressable
-  style={styles.scanBtn}
-  onPress={() => setScanEnabled(true)}
->
-  <Image
-    source={require('../assets/images/search.png')}
-    style={styles.searchImg}
-  />
-</Pressable>
+          style={styles.scanBtn}
+          onPress={() => setScanEnabled(true)}
+        >
+          <Image
+            source={require('../assets/images/search.png')}
+            style={styles.searchImg}
+          />
+        </Pressable>
 
-
-        {/* Empty spacer (future use) */}
+        {/* Spacer */}
         <View style={{ width: 52 }} />
       </View>
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -190,14 +203,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  searchIcon: {
-    fontSize: 36,
-    color: '#fff',
-  },
   searchImg: {
-  width: 40,
-  height: 40,
-  resizeMode: 'contain',
-}
-
+    width: 40,
+    height: 40,
+    resizeMode: 'contain',
+  },
 });

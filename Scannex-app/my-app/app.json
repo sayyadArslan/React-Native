@@ -21,7 +21,6 @@
     },
 
     "android": {
-    
       "package": "com.arslanix.scannex",
       "edgeToEdgeEnabled": true,
       "adaptiveIcon": {
